@@ -1,36 +1,33 @@
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Scanner;
 
-public class uc6 {
+public class uc8 {
 
-    public static void main(String[] args) {
+    public static boolean checkPalindrome(String input) {
+        LinkedList<Character> list = new LinkedList<>();
 
-        System.out.println("Palindrome Checker App");
-        System.out.println();
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Input text: ");
-        String text = sc.nextLine();
-
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
-
-        for (char c : text.toCharArray()) {
-            queue.add(c);
-            stack.push(c);
+        // Add characters to linked list
+        for (char c : input.toCharArray()) {
+            list.add(c);
         }
 
-        boolean isPalindrome = true;
-
-        while (!queue.isEmpty()) {
-            if (!queue.remove().equals(stack.pop())) {
-                isPalindrome = false;
-                break;
+        // Compare first and last
+        while (list.size() > 1) {
+            if (!list.removeFirst().equals(list.removeLast())) {
+                return false;
             }
         }
+        return true;
+    }
 
-        System.out.println("Is it a Palindrome? : " + isPalindrome);
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Input: ");
+        String input = sc.nextLine();
+
+        boolean result = checkPalindrome(input);
+
+        System.out.println("Is Palindrome?: " + result);
     }
 }
-
-
